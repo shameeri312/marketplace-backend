@@ -16,9 +16,9 @@ class SignupView(APIView):
     def post(self, request, *args, **kwargs):
         data = self.request.data
         print(data)
+
         first_name = data.get("first_name")
         last_name = data.get("last_name")
-        company_name = data.get("company_name")
         email = data.get("email")
         phone_no = data.get("phone_no")
         password = data.get("password")
@@ -43,7 +43,6 @@ class SignupView(APIView):
                     email=email,
                     first_name=first_name,
                     last_name=last_name,
-                    company_name=company_name,
                     phone_no=phone_no,
                     password=password,
                 )
