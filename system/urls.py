@@ -16,6 +16,10 @@ urlpatterns = [
         include("users.urls", namespace="user_accounts"),
     ),
     path(
+        "api/items/",
+        include("items.urls", namespace="items"),
+    ),
+    path(
         "api/token/",
         TokenObtainPairView.as_view(),
         name="token_obtain_pair",

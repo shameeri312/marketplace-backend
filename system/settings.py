@@ -27,7 +27,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
+    # apps
     "users",
+    "items",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +79,7 @@ WSGI_APPLICATION = "system.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "marketplace",
+        "NAME": "market_place",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "localhost",
