@@ -29,6 +29,7 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name="token_refresh",
     ),
+    path("chat/", include("chatapp.urls")),
 ]
 
 # Add this for media file serving during development

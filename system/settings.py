@@ -13,11 +13,13 @@ SECRET_KEY = "marketplace&2025-al-shifa"
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["http://localhost:3111"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3111", "http://192.168.100.17:3111"]
 
 
 # Application definition
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # apps
     "users",
+    "chatapp",
     "items",
 ]
 
@@ -69,6 +72,9 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 }
+
+
+ASGI_APPLICATION = "system.asgi.application"
 
 WSGI_APPLICATION = "system.wsgi.application"
 
@@ -154,6 +160,16 @@ CORS_ALLOW_HEADERS = (
     "authorization",
     "api-token",
 )
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+    },
+    "CONFIG": {
+        "hosts": [("127.0.0.1", 6379)],
+    },
+}
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 

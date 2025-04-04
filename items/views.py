@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
@@ -45,6 +46,23 @@ class ItemDetailView(APIView):
         item = get_object_or_404(Item, id=id)
         serializer = ItemSerializer(item)
         return Response(serializer.data)
+
+    def patch(self, request, id, *args, **kwargs):
+        item = get_object_or_404(Item, id=id)
+
+        serializer = ItemSerializer(item, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    def delete(self, request, id, *args, **kwargs):
+        item = get_object_or_404(Item, id=id)
+        item.delete()
+        return Response(
+            {"detail": "Item deleted successfully."}, status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class ItemByCategoryView(APIView):
