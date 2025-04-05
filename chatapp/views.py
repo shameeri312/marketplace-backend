@@ -1,6 +1,16 @@
 from .serializers import *
-from .models import Message
+from .models import *
 from rest_framework import viewsets, permissions
+from rest_framework import generics
+
+# views.py
+
+
+class ChatViewSet(viewsets.ModelViewSet):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
+    lookup_field = "chat_id"
+    http_method_names = ["get", "delete"]  # only allow list and delete
 
 
 class MessageView(viewsets.ModelViewSet):
